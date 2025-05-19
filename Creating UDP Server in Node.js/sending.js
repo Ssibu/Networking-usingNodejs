@@ -1,9 +1,13 @@
-import dgram from 'node:dgram';
+import dgram from "node:dgram"; //UDP
 
 const socket = dgram.createSocket("udp4");
-console.log(socket)
+
 socket.on("message", (message, remoteAddress) => {
-    console.log(message.toString())
-    console.log(remoteAddress)
-})
-socket.send("Hi from Node.js", 4000,"192.168.68.11");
+  console.log(message.toString());
+  console.log(remoteAddress);
+  socket.close();
+});
+
+socket.send("Hi from Client.js", 4000, "192.168.87.41", () => {
+  console.log("Message sent");
+});
